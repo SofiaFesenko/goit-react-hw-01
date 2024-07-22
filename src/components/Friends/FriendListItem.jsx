@@ -1,6 +1,6 @@
-import friendscss from "./Friends.module.css";
+import friendscss from "./FriendListItem.module.css";
 
-const Friends = props => {  
+const FriendListItem = props => {  
     return (
       <div className={friendscss.friend}>
         <img src={props.avatar} className={friendscss.friendAvatar}/>
@@ -10,4 +10,4 @@ const Friends = props => {
   )
 }
 
-export default Friends
+export default FriendListItem

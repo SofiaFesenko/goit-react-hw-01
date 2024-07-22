@@ -1,13 +1,11 @@
 import Profile from './components/Profile/Profile'
-import Friends from './components/Friends/Friends'
-import TransactionHistory from './components/Transaction/Transaction'
+import FriendList from './components/Friends/FriendList'
+import FriendListItem from './components/Friends/FriendListItem'
+import TransactionHistory from './components/Transaction/TransactionHistory'
 
 import userData from './jsondata/userData.json'
 import friendsData from './jsondata/friendsData.json'
 import transactionData from './jsondata/transactionData.json'
-
-import transactioncss from "./components/Transaction/Transaction.module.css";
-import friendscss from "./components/Friends/Friends.module.css";
 
 
 function App() {
@@ -23,46 +21,25 @@ function App() {
           likes={userData.stats.likes}
         />
 
-
-        <div className={friendscss.friendsList}>
+        <FriendList>
           {
             friendsData.map(friendOne => {
               const color = friendOne.isOnline ? "green" : "red";
-              return <Friends
-                key={friendOne.name}
-                color={color}
-                avatar={friendOne.avatar}
-                name={friendOne.name}
-              />
+              return (
+                <FriendListItem
+                  key={friendOne.id}
+                  color={color}
+                  avatar={friendOne.avatar}
+                  name={friendOne.name}
+                  isOnline={friendOne.isOnline}
+                  />
+                );
             })
           }
-        </div>
+          </FriendList>
+        
 
-
-        <div>
-          <table className={transactioncss.table}>
-            <thead>
-              <tr>
-                <th className={transactioncss.th}>Type</th>
-                <th className={transactioncss.th}>Amount</th>
-                <th className={transactioncss.th}>Currency</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {
-                transactionData.map(transactionOne => {
-                  return <TransactionHistory
-                    key={transactionOne.amount}
-                    type={transactionOne.type}
-                    amount={transactionOne.amount}
-                    currency={transactionOne.currency}
-                  />
-                })
-              }
-            </tbody>
-          </table>
-        </div>
+        <TransactionHistory items={transactionData} />
 
         
     </>
